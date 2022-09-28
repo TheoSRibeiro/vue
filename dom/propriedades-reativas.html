@@ -1,0 +1,65 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+    <p>{{titulo}}</p>
+   <!-- two way data biding -->
+    <input type="text" v-bind:value="titulo"
+        v-on:input="titulo=$event.target.value"
+    >
+    <!-- ou -->
+    <hr>
+    <p>{{titulo}}</p>
+    <input type="text" v-model="titulo">
+    
+    <hr>
+    <hr>
+
+    <button v-on:click="aumentar">Aumentar</button>
+    <button v-on:click="contador2++">Aumentar 2</button>
+    <button v-on:click="diminuir">Diminuir</button>
+    <p>Contador: {{ contador }} | {{ contador2 }}</p>
+    <p>Resultado: {{ resultado }}</p>
+
+    <hr>
+    <!-- sintaxe reduzida -->
+    <!-- <button v-on:click="aumentar">Aumentar</button> -->
+    <button @click="aumentar">Aumentar</button>
+    <!-- <input type="text" v-bind:value="contador"> -->
+    <input type="text" :value="contador">
+
+</div>
+
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            titulo: 'Vue',
+            contador: 0,  
+            contador2: 0,          
+        },
+        watch:{
+            contador(novo,antigo){
+                // apos 10s zera o contador
+                setTimeout(() => {
+                    this.contador = 0
+                }, 10000)
+            }
+        },
+        computed: {
+            resultado(){
+                console.log("metodo resultado chamado")
+                return this.contador >= 5 ? 'Maior ou igual a 5' : 'Menor que 5'
+                
+            }
+        },
+        methods:{
+            aumentar(){
+                this.contador++                
+            },
+            diminuir(){
+                this.contador--
+            },
+            
+        }
+    })
+</script>
