@@ -1,10 +1,17 @@
 <template>
-	<h1>Stock Trader</h1>
+	<v-app>
+		<HeaderVue/>
+		<v-content>
+			<router-view></router-view>
+		</v-content>
+	</v-app>
 </template>
 
 <script>
-export default {
+import HeaderVue from './components/views/Header.vue';
 
+export default {
+	components: {HeaderVue}
 }
 </script>
 
